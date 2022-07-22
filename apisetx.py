@@ -27,7 +27,7 @@ class ImageHelper(object):
       mov = int.from_bytes(self.__getchunk(0x3C, 0x04), 'little') + 0x04
       ifh = unpack('<2H3L2H', self.__getchunk(mov, 0x14)) # IMAGE_FILE_HEADER
       mov += ifh[5] + 0x14 # look for .apiset section
-      for x in range(ifh[1]):
+      for _ in range(ifh[1]):
          sec = unpack('<8s6L2HL', self.__getchunk(mov, 0x28))
          if b'.apiset\x00' == sec[0]:
             self.__buf = self.__getchunk(sec[4], sec[3])
